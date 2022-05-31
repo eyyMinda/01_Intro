@@ -1,0 +1,8 @@
+**/SASS/*.css
+**/Animations/*.css
+**/Modern_Apartment/*.css
+**/Modern_Apartment
+**/Luxestate/*.css
+**/node_modules/ 
+**/.vscode
+**.DS_Store
