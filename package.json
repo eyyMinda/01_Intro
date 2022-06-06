@@ -1,12 +1,18 @@
 {
-  "name": "01_intro",
+  "name": "38-grupe-server",
   "version": "1.0.0",
-  "description": "Zyzz Legacy",
+  "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon ./index.js",
+    "prod": "",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["The", "God", "The", "Legend"],
-  "author": "Minda",
-  "license": "ISC"
+  "keywords": [],
+  "author": "Rimantas",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
 }
