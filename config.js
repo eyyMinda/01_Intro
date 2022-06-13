@@ -53,8 +53,4 @@ const nodeEnv = process.env.NODE_ENV;
 const env = nodeEnv ? nodeEnv : 'dev';
 const options = config[env] ? config[env] : config.dev;
 
-// console.log('kur dirba kodas?');
-// console.log('Ka parasiau terminale:', nodeEnv);
-// console.log('Kokia aplinka turesiu paleisti:', env);
-
 export default options;
