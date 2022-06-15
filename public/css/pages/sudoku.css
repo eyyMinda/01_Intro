@@ -1,0 +1,11 @@
+/* base */
+@import '../components/reset.css';
+
+/* 3rd-party */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css');
+/* components */
+@import '../base/footer.css';
+@import '../components/header.css';
+@import '../components/sudoku.css';
+
+/* Custom CSS Below */
