@@ -1,0 +1,16 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    gap: 10px;
+    /* text-align: start; */
+}
+.form > input {
+    font-size: 20px;
+    padding: 0 0.2em;
+    line-height: 1.8rem;
+}
+.form > button {
+    font-size: 20px;
+    line-height: 1.8rem;
+}

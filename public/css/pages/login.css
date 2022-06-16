@@ -6,6 +6,7 @@
 
 /* components */
 @import '../base/footer.css';
+@import '../base/form.css';
 @import '../components/header.css';
 
 /* Custom CSS Below */
