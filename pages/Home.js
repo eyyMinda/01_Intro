@@ -1,9 +1,10 @@
 import { PageTemplate } from "../lib/PageTemplate.js";
 
 class PageHome extends PageTemplate {
-    constructor() {
-        super();
+    constructor(data) {
+        super(data);
         this.title = `┼─The Cycle: Frontier─┼`;
+        this.isLoggedIn = data.user.isLoggedIn
     }
 
     mainHTML() {
