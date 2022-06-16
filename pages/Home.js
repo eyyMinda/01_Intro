@@ -4,7 +4,7 @@ class PageHome extends PageTemplate {
     constructor(data) {
         super(data);
         this.title = `┼─The Cycle: Frontier─┼`;
-        this.isLoggedIn = data.user.isLoggedIn
+        this.isLoggedIn = data.user.isLoggedIn;
     }
 
     mainHTML() {

@@ -1,10 +1,11 @@
 import { PageTemplate } from "../lib/PageTemplate.js";
 
 class PageRegister extends PageTemplate {
-    constructor() {
-        super();
+    constructor(data) {
+        super(data);
         this.title = `┼─Register─┼`;
         this.css = '<link rel="stylesheet" href="/css/pages/register.css">';
+        this.isLoggedIn = data.user.isLoggedIn;
     }
 
     mainHTML() {
