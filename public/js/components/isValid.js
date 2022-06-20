@@ -22,4 +22,18 @@ class isValid {
         return [false, 'All Set!'];
     }
 }
+
+if (import.meta.vitest) {
+    const { describe, expect, it } = import.meta.vitest;
+
+    describe('#isFullnameValid??', () => {
+        it('Sets data', () => {
+            const [err, msg] = isValid.fullname('John Doe')
+            expect(err).toStrictEqual(false)
+            expect(msg).toStrictEqual('All Set!')
+        });
+    });
+}
+
+
 export { isValid };
