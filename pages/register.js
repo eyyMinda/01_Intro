@@ -13,22 +13,23 @@ class PageRegister extends PageTemplate {
         return `
         <div class="row">
             <h1>Register</h1>
-            <p>Register or leave</p>
+            <p>Fill Your Shit</p>
             <form class="form" action="/api/account" method="POST">
-                
-            <label for="fullname">Fullname</label>
-                <input id="fullname" name="fullname" placeholder="John Doe" type="text" autocomplete="name" required>
+                <div class="notifications"></div>    
+
+                <label for="fullname">Fullname</label>
+                <input id="fullname" name="fullname" data-validation="fullname" placeholder="John Doe" type="text" autocomplete="name" required autofocus>
 
                 <label for="email">Email</label>
-                <input id="email" name="email" placeholder="JohnDoe@email.com"type="email" autocomplete="email" required>
+                <input id="email" name="email" data-validation="email" placeholder="JohnDoe@email.com"type="email" autocomplete="email" required>
                 
                 <label for="password">Password</label>
-                <input id="pass" name="pass" placeholder="yourmom69"type="password" autocomplete="new-password" required>
+                <input id="pass" name="pass" data-validation="password" placeholder="yourmom69"type="password" autocomplete="new-password" required>
                 
                 <label for="repass">Repeat password</label>
-                <input id="repass" name="repass" placeholder="yourmom69"type="password" autocomplete="new-password" required>
+                <input id="repass" name="repass" data-validation="password" placeholder="yourmom69"type="password" autocomplete="new-password" required>
                 
-                <span><input type="checkbox" id="tos" required>
+                <span><input id="tos" name="tos" data-validation="tos" type="checkbox" required>
                 <label for="tos">Agree to terms and service conditions</label></span>
 
                 <button type="submit">Register</button>

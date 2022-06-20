@@ -7,13 +7,14 @@
   "scripts": {
     "dev": "nodemon ./index.js",
     "prod": "",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest --coverage"
   },
   "keywords": [],
   "author": "Minda",
   "license": "MIT",
   "devDependencies": {
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.16",
+    "vitest": "^0.15.1"
   },
   "directories": {
     "lib": "lib"
