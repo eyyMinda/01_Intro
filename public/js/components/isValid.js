@@ -29,8 +29,8 @@ if (import.meta.vitest) {
     describe('#isFullnameValid??', () => {
         it('Sets data', () => {
             const [err, msg] = isValid.fullname('John Doe')
-            expect(err).toStrictEqual(false)
-            expect(msg).toStrictEqual('All Set!')
+            expect(err).toBe(false)
+            expect(msg).toBe('All Set!')
         });
     });
 }
