@@ -7,33 +7,20 @@ class isValid {
         if (parts.length < 2) {
             return [true, 'Fullname consists of First and Last name...'];
         }
-        return [false, 'All Set!'];
+        return [false, 'OK'];
     }
     static email(str) {
         if (str.length < 2) {
             return [true, 'Email Too Short...'];
         }
-        return [false, 'All Set!'];
+        return [false, 'OK'];
     }
     static password(str) {
         if (str.length < 2) {
             return [true, 'Password Too Short...'];
         }
-        return [false, 'All Set!'];
+        return [false, 'OK'];
     }
 }
-
-if (import.meta.vitest) {
-    const { describe, expect, it } = import.meta.vitest;
-
-    describe('#isFullnameValid??', () => {
-        it('Sets data', () => {
-            const [err, msg] = isValid.fullname('John Doe')
-            expect(err).toBe(false)
-            expect(msg).toBe('All Set!')
-        });
-    });
-}
-
 
 export { isValid };
