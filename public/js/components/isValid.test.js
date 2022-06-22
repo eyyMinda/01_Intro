@@ -212,6 +212,17 @@ if (import.meta.vitest) {
                 expect(msg).toBe('You forgot @');
                 expect(err).toBe(true);
             });
+            it('multiple @', () => {
+                const [err, msg] = isValid.email('abs@gmail.com@');
+                expect(msg).toBe('Must only be one @ symbol');
+                expect(err).toBe(true);
+            });
+            it('OK', () => {
+                const [err, msg] = isValid.email('absent@gmail.com');
+                expect(msg).toBe('OK');
+                expect(err).toBe(false);
+            });
+
         });
 
         describe('Correct email, but with forgiving faults', () => {
@@ -229,7 +240,7 @@ if (import.meta.vitest) {
 
         describe('Correct email', () => {
             it('OK-shortest', () => {
-                const [err, msg] = isValid.email('a@c.c.co');
+                const [err, msg] = isValid.email('a@a.lt');
                 expect(msg).toBe('OK');
                 expect(err).toBe(false);
             });
