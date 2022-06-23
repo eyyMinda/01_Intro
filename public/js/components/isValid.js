@@ -1,7 +1,7 @@
 class isValid {
     static fullname(str) {
         if (str === undefined || str === '') return [true, 'Fullname cannot be blank'];
-        if (typeof str !== 'string') return [true, 'Wrong type'];
+        if (typeof str !== 'string') return [true, 'Must be a string'];
 
         str = str.trim().replace(/\s+/g, ' ');
         const minWordsCount = 2;
@@ -25,26 +25,41 @@ class isValid {
 
     static email(str) {
         if (str === undefined || str === '') return [true, 'Email cannot be blank'];
-        if (typeof str !== 'string') return [true, 'Wrong type'];
-
+        if (typeof str !== 'string') return [true, 'Must be a string'];
         str = str.trim().replace(/\s+/g, ' ');
+        const regx = /^([a-zA-Z0-9\._]+)@([a-zA-Z0-9])+.([a-z]+)(.[a-z]+)?$/;  ///Full Regex email validation form
+
         const minWordLength = 6;
-        const ats = str.split('@').length - 1;
-        const regx = /^([a-zA-Z0-9\._]+)@([a-zA-Z0-9])+.([a-z]+)(.[a-z]+)?$/  ///Full Regex email validation form
-
+        const allowedSymbols = /^([a-zA-Z0-9\.])/;
+        const parts = str.split('@');
+        const [locale, domain] = parts;
         if (str.length < minWordLength) return [true, `Too short, email must be atleast ${minWordLength} symbols`];
-        if (ats < 1) return [true, 'You forgot @'];
-        if (ats > 1) return [true, 'Must only be one @ symbol'];
+        if (parts.length !== 2) return [true, 'Email must contain one @ symbol'];
+        if (locale === '') return [true, 'Missing email name before @ symbol'];
+        if (domain === '') return [true, 'Missing email domain after @ symbol'];
+        if (str.includes('..')) return [true, 'Email cannot contain 2 dots in a row'];
+        if (locale[0] === '.' || !isNaN(+locale[0])) return [true, 'Email must start with a letter'];
+        for (const s of locale) {
+            if (!allowedSymbols.test(s)) return [true, `Email name includes a restricted symbol - ${s}`];
+        };
 
+        const domainParts = domain.split('.');
+        if (domainParts.length === 1) return [true, 'Domain is incorrect. No dot (.) found after @ symbol'];
+        if (domainParts[0] === '') return [true, 'Domain cannot start with a dot (.)'];
+        if (domainParts[domainParts.length - 1].length < 2) return [true, 'Domain has to end with atleast 2 letters'];
+        for (const s of domain) {
+            if (!allowedSymbols.test(s)) return [true, `Email domain includes a restricted symbol ${s}`];
+        };
 
-        if (regx.test(str)) return [false, 'OK']
+        return [false, 'OK'];
     }
 
     static password(str) {
+        const minPassLength = 12;
         if (str === undefined || str === '') return [true, 'Password cannot be blank'];
-        if (typeof str !== 'string') return [true, 'Wrong type'];
-
+        if (typeof str !== 'string') return [true, 'Must be a string'];
         str = str.trim().replace(/\s+/g, ' ');
+        if (str.length < minPassLength) return [true, `Password is too short, must be atleast ${minPassLength} symbols`];
 
         return [false, 'OK'];
     }

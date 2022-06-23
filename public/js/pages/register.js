@@ -21,27 +21,43 @@ if (submitDOM) {
         for (const inputDOM of inputsDOM) {
             if (inputDOM.type !== 'checkbox') {
                 const rule = inputDOM.dataset.validation;
-
                 const [err, msg] = isValid[rule](inputDOM.value);
                 if (err) {
-                    if (!errors.includes(msg)) {
-                        errors.push(msg);
-                    }
+                    errors.push(msg);
                     formControlsDOM[i].classList.add('error');
                 } else {
                     data[inputDOM.name] = inputDOM.value;
-                    console.log(formControlsDOM[i]);
                     formControlsDOM[i].classList.add('success');
                 }
             } else {
                 data[inputDOM.name] = inputDOM.checked;
-                if (!data[inputDOM.name]) errors.push('Must agree to terms of service');
+                if (!inputDOM.checked) errors.push('Must agree to terms of service');
             }
             i++;
+        }
+        if (inputsDOM[2].value !== inputsDOM[3].value) {
+            errors.push('Passwords do not match');
+            formControlsDOM[2].classList.add('error');
+            formControlsDOM[3].classList.add('error');
         }
         if (errors.length) {
             notificationsDOM.classList.add('show');
             notificationsDOM.innerText = errors.join('.\n') + '.';
+        } else {
+            delete data.repass;
+            delete data.tos;
+
+            async function postData() {
+                const res = await fetch(formDOM.action, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data),
+                });
+                return res.json();
+            }
+            postData();
         }
         console.log(data)
     })
