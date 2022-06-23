@@ -14,7 +14,7 @@ class PageGameTicTacToe extends PageTemplate {
         <meta name="msapplication-TileColor" content="#da532c">
         <meta name="theme-color" content="#ffffff"></meta>`;
         this.meta = `<meta name="description" content="Sudoku">
-        <meta name="keywords" content="CSS, JavaScript, NodeJS, Programming, TicTacToe">`
+        <meta name="keywords" content="CSS, JavaScript, NodeJS, Programming, TicTacToe">`;
     }
 
     headHTML() {

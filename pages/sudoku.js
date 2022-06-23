@@ -15,7 +15,7 @@ class PageGameSudoku extends PageTemplate {
         <meta name="msapplication-TileColor" content="#da532c">
         <meta name="theme-color" content="#ffffff">`;
         this.meta = `<meta name="description" content="Sudoku">
-        <meta name="keywords" content="Bootstrap, CSS, JavaScript, NodeJS, Programming, Sudoku">`
+        <meta name="keywords" content="Bootstrap, CSS, JavaScript, NodeJS, Programming, Sudoku">`;
     }
     headHTML() {
         return `<meta charset="UTF-8">

@@ -6,7 +6,7 @@ class PageRegister extends PageTemplate {
         super(data);
         this.title = `┼─Register─┼`;
         this.css = '<link rel="stylesheet" href="/css/pages/register.css">';
-        this.js = 'register'
+        this.js = '<script src="/js/pages/register.js" type="module" defer></script>';
         this.isLoggedIn = data.user.isLoggedIn;
     }
 
@@ -17,7 +17,7 @@ class PageRegister extends PageTemplate {
             email: isDev ? 'ZoeDivision20@rope.round' : '',
             pass: isDev ? 'BaitZoeToSmash69' : '',
             repass: isDev ? 'BaitZoeToSmash9' : '',
-        }
+        };
         return `<div class="block">
                     <div class="header">
 		                <h2>Create Account</h2>
@@ -58,7 +58,7 @@ class PageRegister extends PageTemplate {
                         </span>
                         <button type="submit">Register</button>
                     </form>
-                </div>`
+                </div>`;
     }
 }
 
