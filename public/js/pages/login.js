@@ -9,45 +9,31 @@ const notificationsDOM = formDOM.querySelector('.notifications');
 if (submitDOM) {
     submitDOM.addEventListener('click', async (e) => {
         e.preventDefault();
-        notificationsDOM.classList.remove('success');
-        notificationsDOM.classList.remove('show');
+        notificationsDOM.classList.remove('success', 'show');
         formControlsDOM.forEach(contr => {
-            contr.classList.remove('success');
-            contr.classList.remove('error');
+            contr.classList.remove('success', 'error');
         });
 
         const data = {};
         const errors = [];
         let i = 0;
         for (const inputDOM of inputsDOM) {
-            if (inputDOM.type !== 'checkbox') {
-                const rule = inputDOM.dataset.validation;
-                const [err, msg] = isValid[rule](inputDOM.value);
-                if (err) {
-                    errors.push(msg);
-                    formControlsDOM[i].classList.add('error');
-                } else {
-                    data[inputDOM.name] = inputDOM.value;
-                    formControlsDOM[i].classList.add('success');
-                }
+            const rule = inputDOM.dataset.validation;
+            const [err, msg] = isValid[rule](inputDOM.value);
+            if (err) {
+                errors.push(msg);
+                formControlsDOM[i].classList.add('error');
             } else {
-                data[inputDOM.name] = inputDOM.checked;
-                if (!inputDOM.checked) errors.push('Must agree to terms of service');
+                data[inputDOM.name] = inputDOM.value;
+                formControlsDOM[i].classList.add('success');
             }
             i++;
         }
-        if (inputsDOM[2].value !== inputsDOM[3].value) {
-            errors.push('Passwords do not match');
-            formControlsDOM[2].classList.add('error');
-            formControlsDOM[3].classList.add('error');
-        }
+
         if (errors.length) {
             notificationsDOM.classList.add('show');
             notificationsDOM.innerText = errors.join('.\n') + '.';
         } else {
-            delete data.repass;
-            delete data.tos;
-
             const response = await fetch(formDOM.action, {
                 method: 'POST',
                 headers: {
@@ -62,7 +48,6 @@ if (submitDOM) {
             if (response.ok) {
                 notificationsDOM.classList.add('success');
                 console.log(data)
-
             } else {
                 notificationsDOM.classList.remove('success');
             }

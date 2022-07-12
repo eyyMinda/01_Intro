@@ -37,6 +37,7 @@ handler.innerMethods.post = async (data, callback) => {
     payload.hashedPassword = utils.hash(pass)[1];
     payload.lastLoginDate = 0;
     payload.registrationDate = Date.now();
+    payload.browser = data.user.browser;
 
     const [createErr] = await file.create('accounts', email + '.json', payload);
     if (createErr) return callback(500, { msg: 'Account was not created due to server problems, try again later' });

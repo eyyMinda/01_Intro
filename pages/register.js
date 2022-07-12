@@ -5,7 +5,7 @@ class PageRegister extends PageTemplate {
     constructor(data) {
         super(data);
         this.title = `┼─Register─┼`;
-        this.css = '<link rel="stylesheet" href="/css/pages/register.css">';
+        this.css = '<link rel="stylesheet" href="/css/pages/auth.css">';
         this.js = '<script src="/js/pages/register.js" type="module" defer></script>';
         this.isLoggedIn = data.user.isLoggedIn;
     }

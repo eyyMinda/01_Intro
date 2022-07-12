@@ -96,7 +96,8 @@ main {
 
 .form > .notifications {
     display: none;
-    margin: 15px 0;
+	width: 93%;
+    margin: 15px 0px;
     padding: 10px 20px;
     border: 2px solid #f00;
     background-color: #d46e6e;
@@ -104,4 +105,8 @@ main {
 }
 .form > .notifications.show {
     display: block;
+}
+.form > .notifications.success {
+	background-color: #2ecc71;
+	border-color: #079743;
 }
