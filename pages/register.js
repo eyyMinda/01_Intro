@@ -13,10 +13,10 @@ class PageRegister extends PageTemplate {
     mainHTML() {
         const isDev = config.name === 'dev';
         const formValues = {
-            fullname: isDev ? 'Zoe Divident' : '',
-            email: isDev ? 'ZoeDivision20@rope.round' : '',
-            pass: isDev ? 'BaitZoeToSmash69' : '',
-            repass: isDev ? 'BaitZoeToSmash9' : '',
+            fullname: isDev ? "Zoe Divident" : "",
+            email: isDev ? "ZoeDivision20@rope.round" : "",
+            pass: isDev ? "BaitZoeToSmash69" : "",
+            repass: isDev ? "BaitZoeToSmash9" : "",
         };
         return `<div class="block">
                     <div class="header">

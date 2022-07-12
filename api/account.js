@@ -18,7 +18,7 @@ handler.innerMethods.post = async (data, callback) => {
     const { payload } = data;
 
     const [validErr, validMsg] = utils.objectValidator(payload, {
-        required: ['fullname', 'email', 'pass'],
+        required: ["fullname", "email", "pass"],
     });
     if (validErr) return callback(400, { msg: validMsg });
 

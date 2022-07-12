@@ -1,6 +1,7 @@
 import { file } from "../lib/file.js";
 import { isValid } from "../lib/is-valid/isValid.js";
 import { utils } from "../lib/utils.js";
+import config from "../config.js";
 
 const handler = {};
 
@@ -44,11 +45,6 @@ handler._innerMethods.post = async (data, callback) => {
     if (hashedLoginPass !== userObject.hashedPassword) {
         return callback(400, { msg: 'Incorrect password', });
     }
-
-    console.log(readMsg);
-    console.log(userObject);
-    console.log(hashedLoginPass);
-    console.log(userObject.hashedPassword);
 
     /////////Let Log In\\\\\\\\
 
