@@ -2,4 +2,4 @@
 /.vscode
 coverage
 .DS_Store
-/.data/**/*.json
+/data/**/*.json

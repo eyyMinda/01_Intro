@@ -20,18 +20,18 @@ handler.innerMethods.post = async (data, callback) => {
     const [validErr, validMsg] = utils.objectValidator(payload, {
         required: ["fullname", "email", "pass"],
     });
-    if (validErr) return callback(400, { msg: validMsg });
+    if (validErr) return callback(400, { msgType: 'error', msg: validMsg });
 
     const { fullname, email, pass } = payload;
     const [fullnameErr, fullnameMsg] = isValid.fullname(fullname);
-    if (fullnameErr) return callback(400, { msg: fullnameMsg });
+    if (fullnameErr) return callback(400, { msgType: 'error', msg: fullnameMsg });
     const [emailErr, emailMsg] = isValid.email(email);
-    if (emailErr) return callback(400, { msg: emailMsg });
+    if (emailErr) return callback(400, { msgType: 'error', msg: emailMsg });
     const [passErr, passMsg] = isValid.password(pass);
-    if (passErr) return callback(400, { msg: passMsg });
+    if (passErr) return callback(400, { msgType: 'error', msg: passMsg });
 
     const [readErr] = await file.read('accounts', email + '.json');
-    if (!readErr) return callback(400, { msg: 'Account already exists' });
+    if (!readErr) return callback(400, { msgType: 'error', msg: 'Account already exists' });
 
     delete payload.pass;
     payload.hashedPassword = utils.hash(pass)[1];
@@ -40,61 +40,61 @@ handler.innerMethods.post = async (data, callback) => {
     payload.browser = data.user.browser;
 
     const [createErr] = await file.create('accounts', email + '.json', payload);
-    if (createErr) return callback(500, { msg: 'Account was not created due to server problems, try again later' });
+    if (createErr) return callback(500, { msgType: 'error', msg: 'Account was not created due to server problems, try again later' });
 
-    return callback(200, { msg: 'Account was created successfully' });
+    return callback(201, { msgType: 'redirect', href: '/login' });
 }
 ////////////////////////////////GET\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 handler.innerMethods.get = async (data, callback) => {
     const email = data.searchParams.get('email');
     const [emailErr, emailMsg] = isValid.email(email);
-    if (emailErr) return callback(400, { msg: emailMsg });
+    if (emailErr) return callback(400, { msgType: 'error', msg: emailMsg });
     const [readErr, readMsg] = await file.read('accounts', email + '.json');
-    if (readErr) return callback(404, { msg: 'This user does not exist or no permissions to view it' });
+    if (readErr) return callback(404, { msgType: 'error', msg: 'This user does not exist or no permissions to view it' });
     const [userErr, userData] = utils.parseJSONtoObject(readMsg);
-    if (userErr) return callback(500, { msg: 'Reading user info was unsuccessfull' });
+    if (userErr) return callback(500, { msgType: 'error', msg: 'Reading user info was unsuccessfull' });
     delete userData.hashedPassword;
-    return callback(200, { msg: userData });
+    return callback(200, { msgType: 'success', msg: userData });
 }
 ////////////////////////////////PUT\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 handler.innerMethods.put = async (data, callback) => {
     const { payload } = data;
     const email = data.searchParams.get('email');
     const [emailErr, emailMsg] = isValid.email(email);
-    if (emailErr) return callback(400, { msg: emailMsg });
+    if (emailErr) return callback(400, { msgType: 'error', msg: emailMsg });
     const [validErr, validMsg] = utils.objectValidator(payload, { optional: ['fullname', 'pass'] });
-    if (validErr) return callback(400, { msg: validMsg });
+    if (validErr) return callback(400, { msgType: 'error', msg: validMsg });
 
     const { fullname, pass } = payload;
     if (fullname) {
         const [fullnameErr, fullnameMsg] = isValid.fullname(fullname);
-        if (fullnameErr) return callback(400, { msg: fullnameMsg });
+        if (fullnameErr) return callback(400, { msgType: 'error', msg: fullnameMsg });
     }
     if (pass) {
         const [passErr, passMsg] = isValid.password(pass);
-        if (passErr) return callback(400, { msg: passMsg });
+        if (passErr) return callback(400, { msgType: 'error', msg: passMsg });
     }
 
     const [readErr, readMsg] = await file.read('accounts', email + '.json');
-    if (readErr) return callback(404, { msg: 'This user does not exist or no permissions to view it' });
+    if (readErr) return callback(404, { msgType: 'error', msg: 'This user does not exist or no permissions to view it' });
     const [parseErr, userData] = utils.parseJSONtoObject(readMsg);
-    if (parseErr) return callback(500, { msg: 'Failed to update account due to server problems, try again later' });
+    if (parseErr) return callback(500, { msgType: 'error', msg: 'Failed to update account due to server problems, try again later' });
     if (fullname) userData.fullname = fullname;
     if (pass) userData.hashedPassword = utils.hash(pass)[1];
 
     const [updateErr] = await file.update('accounts', email + '.json', userData);
-    if (updateErr) return callback(500, { msg: 'Failed to update account due to server problems, try again later' });
+    if (updateErr) return callback(500, { msgType: 'error', msg: 'Failed to update account due to server problems, try again later' });
 
-    return callback(200, { msg: 'Account has been updated' });
+    return callback(200, { msgType: 'success', msg: 'Account has been updated' });
 }
 ////////////////////////////////DELETE\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 handler.innerMethods.delete = async (data, callback) => {
     const email = data.searchParams.get('email');
     const [emailErr, emailMsg] = isValid.email(email);
-    if (emailErr) return callback(400, { msg: emailMsg });
+    if (emailErr) return callback(400, { msgType: 'error', msg: emailMsg });
     const [deleteErr] = await file.delete('accounts', email + '.json', userData);
-    if (deleteErr) return callback(500, { msg: 'Failed to delete an account due to server problems, try again later' });
-    return callback(200, { msg: 'Account has been deleted' });
+    if (deleteErr) return callback(500, { msgType: 'error', msg: 'Failed to delete an account due to server problems, try again later' });
+    return callback(200, { msgType: 'success', msg: 'Account has been deleted' });
 }
 
 export default handler;
