@@ -2,6 +2,7 @@ import { file } from "../lib/file.js";
 import { isValid } from "../lib/is-valid/isValid.js";
 import { utils } from "../lib/utils.js";
 import config from "../config.js";
+import { ApiResponse } from "../lib/ApiResponse.js";
 
 const handler = {};
 
@@ -21,29 +22,31 @@ handler._innerMethods.post = async (data, callback) => {
     ////////Check If Valid Info\\\\\\\\
     const [validErr, validMsg] = utils.objectValidator(payload, { required: ['email', 'pass'], });
 
-    if (validErr) { return callback(400, { msg: validMsg, }); }
+    if (validErr) {
+        return callback(400, ApiResponse.error(validMsg));
+    }
 
     const { email, pass } = payload;
 
     const [emailErr, emailMsg] = isValid.email(email);
-    if (emailErr) { return callback(400, { msg: emailMsg, }); }
+    if (emailErr) { return callback(400, ApiResponse.error(emailMsg)); }
 
     const [passErr, passMsg] = isValid.password(pass);
-    if (passErr) { return callback(400, { msg: passMsg, }); }
+    if (passErr) { return callback(400, ApiResponse.error(passMsg)); }
 
     ////////Check If Valid Info\\\\\\\\
 
     const [readErr, readMsg] = await file.read('accounts', email + '.json');
-    if (readErr) { return callback(400, { msg: 'Account not found', }); }
+    if (readErr) { return callback(400, ApiResponse.error('Account not found')); }
 
     const [parseErr, userObject] = utils.parseJSONtoObject(readMsg);
-    if (parseErr) { return callback(500, { msg: 'Search failed', }); }
+    if (parseErr) { return callback(500, ApiResponse.error('Search failed')); }
 
     const [hashErr, hashedLoginPass] = utils.hash(pass);
-    if (hashErr) { return callback(500, { msg: 'Search failed', }); }
+    if (hashErr) { return callback(500, ApiResponse.error('Search failed')); }
 
     if (hashedLoginPass !== userObject.hashedPassword) {
-        return callback(400, { msg: 'Incorrect password', });
+        return callback(400, ApiResponse.error('Incorrect password'));
     }
 
     /////////Let Log In\\\\\\\\
@@ -55,7 +58,7 @@ handler._innerMethods.post = async (data, callback) => {
     }
 
     const [createErr] = await file.create('token', randomToken + '.json', tokenObject);
-    if (createErr) { return callback(500, { msg: 'Unable to assign login session', }); }
+    if (createErr) { return callback(500, ApiResponse.error('Unable to assign login session')); }
 
     const cookies = [
         'login-token=' + randomToken,
@@ -68,7 +71,7 @@ handler._innerMethods.post = async (data, callback) => {
         'HttpOnly',
     ];
 
-    return callback(200, { msg: 'Token created successfully', }, {
+    return callback(200, ApiResponse.redirect('/'), {
         'Set-Cookie': cookies.join('; '),
     });
 }

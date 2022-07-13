@@ -1,0 +1,1 @@
+console.log('Public sharing is running');
