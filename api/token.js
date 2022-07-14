@@ -12,7 +12,7 @@ handler.token = async (data, callback) => {
         const httpMethodFunc = handler._innerMethods[data.httpMethod];
         return await httpMethodFunc(data, callback);
     }
-    return callback(405, { msg: 'Your HTTP method request was unaccepted' });
+    return callback(405, ApiResponse.error('Your HTTP method request was unaccepted'));
 }
 handler._innerMethods = {};
 
@@ -88,7 +88,20 @@ handler._innerMethods.put = async (data, callback) => {
 
 ////////////////////////////////DELETE\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 handler._innerMethods.delete = async (data, callback) => {
-    return callback(200, { msg: 'Token has been deleted' });
+    const cookies = [
+        'login-token=' + data.cookies['login-token'],
+        'path=/',
+        'domain=localhost',
+        'max-age=-1000',
+        'expires=Sun, 16 Jul 3567 06:23:41 GMT',
+        // 'Secure',
+        'SameSite=Lax',
+        'HttpOnly',
+    ];
+
+    return callback(200, ApiResponse.redirect('/'), {
+        'Set-Cookie': cookies.join('; '),
+    });
 }
 
 ////////////////////////////////VERIFY\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
