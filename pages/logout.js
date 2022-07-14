@@ -9,7 +9,22 @@ class PageLogout extends PageTemplate {
     }
 
     mainHTML() {
-        return `<h1>Logout Page</h1>`;
+        const cookies = [
+            'login-token=' + this.data.cookies['login-token'],
+            'path=/',
+            'domain=localhost',
+            'max-age=-1000',
+            'expires=Sun, 16 Jul 3567 06:23:41 GMT',
+            // 'Secure',
+            'SameSite=Lax',
+            'HttpOnly',
+        ];
+        this.responseHeaders = {
+            'Set-Cookie': cookies.join('; '),
+        }
+
+        return `<h1>Logout Page</h1>
+        <script>location.href='/';</script>`;
     }
 }
 

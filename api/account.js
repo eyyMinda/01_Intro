@@ -11,7 +11,7 @@ handler.account = (data, callback) => {
         const httpMethodFunc = handler.innerMethods[data.httpMethod];
         return httpMethodFunc(data, callback);
     }
-    return callback(405, { msg: 'This method is not acceptable' });
+    return callback(405, ApiResponse.error('This method is not acceptable'));
 }
 
 handler.innerMethods = {};

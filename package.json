@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./index.js",
-    "prod": "",
+    "prod": "NODE_ENV=prod node .",
     "test": "vitest"
   },
   "keywords": [],
