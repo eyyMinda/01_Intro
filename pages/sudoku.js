@@ -1,8 +1,8 @@
 import { PageTemplate } from "../lib/PageTemplate.js";
 
 class PageGameSudoku extends PageTemplate {
-    constructor() {
-        super();
+    constructor(data) {
+        super(data);
         this.title = `┼─Sudoku─┼`;
         this.css = `<link rel="stylesheet" href="/css/pages/sudoku.css">`;
         this.js = `<script src="/js/components/sudoku.js" type="text/javascript" defer></script>
@@ -16,6 +16,7 @@ class PageGameSudoku extends PageTemplate {
         <meta name="theme-color" content="#ffffff">`;
         this.meta = `<meta name="description" content="Sudoku">
         <meta name="keywords" content="Bootstrap, CSS, JavaScript, NodeJS, Programming, Sudoku">`;
+        this.isLoggedIn = data.user.isLoggedIn;
     }
     headHTML() {
         return `<meta charset="UTF-8">

@@ -1,8 +1,8 @@
 import { PageTemplate } from "../lib/PageTemplate.js";
 
 class PageGameTicTacToe extends PageTemplate {
-    constructor() {
-        super();
+    constructor(data) {
+        super(data);
         this.title = `┼─Tic Tac Toe─┼`;
         this.css = `<link rel="stylesheet" href="/css/pages/tictactoe.css">`;
         this.js = `<script src="/js/components/tictactoe.js" type="text/javascript" defer></script>`;
@@ -15,6 +15,7 @@ class PageGameTicTacToe extends PageTemplate {
         <meta name="theme-color" content="#ffffff"></meta>`;
         this.meta = `<meta name="description" content="Sudoku">
         <meta name="keywords" content="CSS, JavaScript, NodeJS, Programming, TicTacToe">`;
+        this.isLoggedIn = data.user.isLoggedIn;
     }
 
     headHTML() {

@@ -1,8 +1,8 @@
 import { PageTemplate } from "../lib/PageTemplate.js";
 
 class PageGameHangMan extends PageTemplate {
-    constructor() {
-        super();
+    constructor(data) {
+        super(data);
         this.title = `┼─HangMan Game─┼`;
         this.css = `<link rel="stylesheet" href="/css/components/reset.css">;
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"/>
@@ -18,6 +18,7 @@ class PageGameHangMan extends PageTemplate {
         <meta name="theme-color" content="#ffffff"></meta>`;
         this.meta = `<meta name="description" content="Sudoku">
         <meta name="keywords" content="Bootstrap, CSS, JavaScript, NodeJS, Programming, HangMan">`;
+        this.isLoggedIn = data.user.isLoggedIn;
     }
     headHTML() {
         return `<meta charset="UTF-8">
