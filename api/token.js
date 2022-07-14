@@ -88,6 +88,8 @@ handler._innerMethods.put = async (data, callback) => {
 
 ////////////////////////////////DELETE\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 handler._innerMethods.delete = async (data, callback) => {
+
+
     const cookies = [
         'login-token=' + data.cookies['login-token'],
         'path=/',
@@ -98,10 +100,14 @@ handler._innerMethods.delete = async (data, callback) => {
         'SameSite=Lax',
         'HttpOnly',
     ];
+    const [deleteErr, deleteMsg] = await file.delete('token', data.cookies['login-token'] + '.json');
+    if (deleteErr) { return callback(200, ApiResponse.error('Unable to unassign token')); }
+    console.log(deleteMsg);
 
     return callback(200, ApiResponse.redirect('/'), {
         'Set-Cookie': cookies.join('; '),
     });
+
 }
 
 ////////////////////////////////VERIFY\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\

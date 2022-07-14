@@ -1,6 +1,5 @@
 /node_modules
 /.vscode
-coverage
 .DS_Store
-/data/**/*.json
-/coverage
+/.data/**/*.json
+coverage/*
