@@ -2,11 +2,8 @@
 ![Security Status](https://img.shields.io/security-headers?label=Security&url=https%3A%2F%2Fgithub.com&style=flat-square)
 ![Gluten Status](https://img.shields.io/badge/Gluten-Free-green.svg)
 ![Eco Status](https://img.shields.io/badge/ECO-Friendly-green.svg)
-[![Discord](https://discord.com/api/guilds/571393319201144843/widget.png)](https://discord.gg/dRwW4rw)
 
 # Nodejs Server
-
-_38 group project_
 
 This project is for educational porpuses only. Pull request are welcome, but priority for project authors! Thank you for your cooperation!
 
@@ -20,7 +17,7 @@ This project is for educational porpuses only. Pull request are welcome, but pri
 1. Clone
 
 ```
-$ git clone https://github.com/front-end-by-rimantas/38-grupe-server
+$ git clone https://github.com/eyyMinda/01_Server
 ```
 
 2. Install
@@ -36,10 +33,9 @@ npm i
 In `dev` mode:
 
 ```
-node ./index.js
-NODE_ENV=dev node ./index.js
-NODE_ENV=test node ./index.js
-NODE_ENV=pomidoras node ./index.js
+node ./index.js || npm run dev
+npm run test
+
 ```
 
 In a specific (pre-defined) `prod` mode:
@@ -50,4 +46,4 @@ NODE_ENV=prod node ./index.js
 
 ## Authors
 
-Rimantas: [Github](https://github.com/belauzas)
+Mindaugas: [Github](https://github.com/eyyMinda)
